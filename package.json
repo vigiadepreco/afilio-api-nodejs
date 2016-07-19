@@ -1,0 +1,10 @@
+{
+    "name": "afilio-api",
+    "version": "0.0.2",
+    "description": "API integration with Afilio",
+    "author": "André Ferreira <andrehrf@gmail.com>",
+    "main": "index.js",
+    "dependencies": {
+        "request": "^2.72.0"
+    }
+}
