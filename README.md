@@ -1,5 +1,8 @@
 # Afilio API
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/andrehrf/afilio-api-nodejs/master/LICENSE)
+[![npm version](https://badge.fury.io/js/afilio-api.svg)](https://badge.fury.io/js/afilio-api)
+
 API integration with Afilio
 
 ## Install
