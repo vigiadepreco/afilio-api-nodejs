@@ -3,7 +3,7 @@
 const url = require("url"),
       request = require("request");
 
-module.exports = function(token, affid){
+module.exports = function(token, affid, siteid){
     return {
         /**
          * Function to generate the API request
@@ -37,6 +37,18 @@ module.exports = function(token, affid){
         },
         
         /**
+         * Function to encode URL
+         * 
+         * @see http://locutus.io/php/url/urlencode/
+         * @param str
+         * @return str
+         */
+        urlencode: function(str){
+            str = (str + '');
+            return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+')
+        },
+        
+        /**
          * Get advertiser programs
          *
          * @see http://wiki.afilio.com.br/doku.php?id=api_de_campanhas
@@ -66,6 +78,31 @@ module.exports = function(token, affid){
          */
         report: function(datestart, dateend, cb){
             this.getinapi("http://v2.afilio.com.br/api/leadsale_api.php?mode=list&type=sale&format=JSON&token=" + token + "&affid=" + affid + "&dateStart=" + datestart + "&dateEnd=" + dateend, cb);
+        }
+        
+        /**
+         * Create tracking links
+         * 
+         * @param string url
+         * @param integer progid
+         * @return void
+         */
+        deeplink: function(url, progid, cb){
+            request("http://v2.afilio.com.br/api/deeplink.php?token="+token+"&affid="+affid+"&progid="+progid+"&bantitle=deeplink&bandesc=deeplink&siteid="+siteid+"&desturl=" + this.urlencode(url), (error, response, body) => { 
+                if(error){
+                    cb(error, null);
+                }
+                else{                    
+                    try{
+                        parser = new DOMParser();
+                        xmlDoc = parser.parseFromString(body, "text/xml");
+                        cb(false, xmlDoc.getElementsByTagName("link")[0].childNodes[0].nodeValue.match(/href=[\'\"](.*?)[\'\"]/)[1]);
+                    }
+                    catch(e){
+                        cb({"msg": "Invalid link to this program."}, null);
+                    }
+                }
+            });
         }
     }
 }
