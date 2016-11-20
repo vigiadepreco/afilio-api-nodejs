@@ -22,7 +22,7 @@ $ npm install afilio-api
 ```js
 "use strict";
 
-let Afilio = require("./index.js"),
+let Afilio = require("afilio-api"),
     afilio = new Afilio("token", "affid", "siteid");
 
 afilio.programs(function(err, result){
