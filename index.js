@@ -77,7 +77,7 @@ module.exports = function(token, affid, siteid){
          * @param function cb
          */
         report: function(datestart, dateend, cb){
-            this.getinapi("http://v2.afilio.com.br/api/leadsale_api.php?mode=list&type=sale&format=JSON&token=" + token + "&affid=" + affid + "&dateStart=" + datestart + "&dateEnd=" + dateend, cb);
+            this.getinapi("http://v2.afilio.com.br/api/leadsale_api.php?mode=list&type=sale&dateType=transaction&format=JSON&token=" + token + "&affid=" + affid + "&dateStart=" + datestart + "&dateEnd=" + dateend, cb);
         }
         
         /**
