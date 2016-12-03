@@ -1,7 +1,8 @@
 "use strict";
 
 const url = require("url"),
-      request = require("request");
+      request = require("request"),
+      DOMParser = require('xmldom').DOMParser;
 
 module.exports = function(token, affid, siteid){
     return {
@@ -94,8 +95,8 @@ module.exports = function(token, affid, siteid){
                 }
                 else{                    
                     try{
-                        parser = new DOMParser();
-                        xmlDoc = parser.parseFromString(body, "text/xml");
+                        var parser = new DOMParser();
+                        var xmlDoc = parser.parseFromString(body, "text/xml");
                         cb(false, xmlDoc.getElementsByTagName("link")[0].childNodes[0].nodeValue.match(/href=[\'\"](.*?)[\'\"]/)[1]);
                     }
                     catch(e){
