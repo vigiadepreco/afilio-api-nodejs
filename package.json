@@ -11,6 +11,10 @@
     "bugs": {
         "url": "https://github.com/vigiadepreco/afilio-api-nodejs/issues"
     },
+    "keywords": [
+        "api",
+        "afilio"
+    ],
     "homepage": "https://github.com/vigiadepreco/afilio-api-nodejs",
     "dependencies": {
         "request": "^2.72.0",
